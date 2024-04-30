@@ -49,6 +49,15 @@ func main() {
 			}))
 	})
 
+	router.GET("/foo", func(ctx *gin.Context) {
+		ctx.JSON(
+			http.StatusOK,
+			gin.H{
+				"message": ginI18n.MustGetMessage(ctx, "foo"),
+			},
+		)
+	})
+
 	if err := router.Run(":8080"); err != nil {
 		log.Fatal(err)
 	}
