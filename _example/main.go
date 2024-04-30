@@ -53,7 +53,7 @@ func main() {
 		ctx.JSON(
 			http.StatusOK,
 			gin.H{
-				"message": ginI18n.MustGetMessage(ctx, "foo"),
+				"message": ginI18n.MustGetMessage(ctx, "foo.bar"),
 			},
 		)
 	})
