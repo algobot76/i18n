@@ -1,0 +1,5 @@
+welcome = "hello"
+welcomeWithName = "hello {{ .name }}"
+
+[foo]
+bar = "foo.bar-en"

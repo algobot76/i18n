@@ -8,11 +8,11 @@ import (
 	ginI18n "github.com/gin-contrib/i18n"
 	"github.com/gin-gonic/gin"
 	"github.com/nicksnyder/go-i18n/v2/i18n"
+	"github.com/pelletier/go-toml/v2"
 	"golang.org/x/text/language"
-	"gopkg.in/yaml.v2"
 )
 
-//go:embed i18n/localize/*
+//go:embed i18n/localizeToml/*
 var fs embed.FS
 
 func main() {
@@ -23,10 +23,10 @@ func main() {
 	// apply i18n middleware
 	router.Use(ginI18n.Localize(ginI18n.WithBundle(&ginI18n.BundleCfg{
 		DefaultLanguage:  language.English,
-		FormatBundleFile: "yaml",
+		FormatBundleFile: "toml",
 		AcceptLanguage:   []language.Tag{language.English, language.German, language.French},
-		RootPath:         "./i18n/localize/",
-		UnmarshalFunc:    yaml.Unmarshal,
+		RootPath:         "./i18n/localizeToml/",
+		UnmarshalFunc:    toml.Unmarshal,
 		// After commenting this line, use defaultLoader
 		// it will be loaded from the file
 		Loader: &ginI18n.EmbedLoader{

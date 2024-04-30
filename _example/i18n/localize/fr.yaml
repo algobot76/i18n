@@ -1,4 +1,0 @@
-welcome: bonjour
-welcomeWithName: bonjour {{ .name }}
-foo:
-  bar: "foo.bar-fr"
