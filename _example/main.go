@@ -2,7 +2,6 @@ package main
 
 import (
 	"embed"
-	"encoding/json"
 	"log"
 	"net/http"
 
@@ -10,9 +9,10 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/nicksnyder/go-i18n/v2/i18n"
 	"golang.org/x/text/language"
+	"gopkg.in/yaml.v2"
 )
 
-//go:embed i18n/localizeJSON/*
+//go:embed i18n/localize/*
 var fs embed.FS
 
 func main() {
@@ -23,10 +23,10 @@ func main() {
 	// apply i18n middleware
 	router.Use(ginI18n.Localize(ginI18n.WithBundle(&ginI18n.BundleCfg{
 		DefaultLanguage:  language.English,
-		FormatBundleFile: "json",
-		AcceptLanguage:   []language.Tag{language.English, language.German, language.Chinese},
-		RootPath:         "./i18n/localizeJSON/",
-		UnmarshalFunc:    json.Unmarshal,
+		FormatBundleFile: "yaml",
+		AcceptLanguage:   []language.Tag{language.English, language.German, language.French},
+		RootPath:         "./i18n/localize/",
+		UnmarshalFunc:    yaml.Unmarshal,
 		// After commenting this line, use defaultLoader
 		// it will be loaded from the file
 		Loader: &ginI18n.EmbedLoader{
